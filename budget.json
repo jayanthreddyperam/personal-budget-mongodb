@@ -1,0 +1,17 @@
+{
+    "myBudget": [
+      {
+        "title": "Eat out",
+        "budget": 100
+      },
+      {
+        "title": "Rent",
+        "budget": 130
+      },
+      {
+        "title": "Grocery",
+        "budget": 60
+      }
+    ]
+}
+  
