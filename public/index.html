@@ -77,6 +77,22 @@
         </div>
 
         <div class="text-box">
+            <h1>Add New Budget Item</h1>
+            <form id="budgetForm">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required><br>
+        
+                <label for="budget">Budget:</label>
+                <input type="number" id="budget" name="budget" required><br>
+        
+                <label for="color">Color:</label>
+                <input type="text" id="color" name="color" pattern="#[0-9A-Fa-f]{6}" title="Enter a valid hexadecimal color code (e.g., #RRGGBB)" required><br>
+        
+                <button type="submit">Add Budget Item</button>
+            </form>
+        </div>
+
+        <div class="text-box">
             <h1>Free</h1>
             <p>
                 This app is free!!! And you are the only one holding your data!
@@ -287,6 +303,40 @@
             polyline.exit()
                 .remove();
         }
+
+        document.getElementById("budgetForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get form inputs
+            const title = document.getElementById("title").value;
+            const budget = parseInt(document.getElementById("budget").value);
+            const color = document.getElementById("color").value;
+
+            // Validate inputs
+            if (!title || !budget || !color) {
+                alert("All fields are required.");
+                return;
+            }
+
+            console.log("Title:", title);
+            console.log("Budget:", budget);
+            console.log("Color:", color);
+
+            // Make the POST request to the server
+            axios.post('/budget', {
+                title: title,
+                budget: budget,
+                color: color
+            })
+            .then(function (response) {
+                console.log("Budget item added successfully:", response.data);
+                // Refresh the chart with updated data (optional)
+                getBudget();
+            })
+            .catch(function (error) {
+                console.error("Error adding budget item:", error);
+            });
+        });
     </script>
 
     <footer>
